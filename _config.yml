@@ -7,11 +7,11 @@
 
 # Site settings
 title: Ryanky's universe
-description: '' # 浩淼宇宙，为何我们在此相遇
+description: 浩淼宇宙，为何我们在此相遇
 baseurl: '' # the subpath of your site, e.g. /blog
-url: '' # the base hostname & protocol for your site http://www.example.com
+url:http://ryankies.github.io
 # google_analytics: 'UA-XXXXXX-X'
-Wechat_username: 'Ryanky'
+Wechat_username: Ryanky
 
 # Build settings
 markdown: kramdown
