@@ -3,26 +3,65 @@ layout: post
 title: Moonlight
 ---
 
-生于此处却不知此处,
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
-日光倾城,万物生长,又是为何?
+import urllib2
+import random
+import socket
+from bs4 import BeautifulSoup
+from time import sleep
 
-若没有大地的拥抱,我们早已消失于茫茫宇宙之中.
 
-若没有原子之稳定,我们亦不复存在.
+user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'   
+headers = { 'User-Agent' : user_agent }  
+mark = 0
+f = open('douban.txt','w')
+while mark<10:
 
-无人问天地变换,斗转星移,是为何故？
+	Subscript = mark * 25
+	req = urllib2.Request('https://movie.douban.com/top250?start='+str(Subscript), headers = headers)  
+	socket.setdefaulttimeout(5)
+	try:
+		req = urllib2.urlopen(req).read()
+		lista = BeautifulSoup(req, "html5lib")
+		soup = lista.select(".grid_view .info")
 
-宇宙又是源于何处?
 
-它是否无始无终?
+	
 
-时间若愿意倒流,
+		for i in soup:
+			soupa = i.select(".hd a span")
+			soupb = i.select(".bd p")[0]
+			stra = ''
+			for j in soupa:
+				# print j.get_text(',', strip=True).encode('utf8')
+				stra += j.get_text(',', strip=True).encode('utf8')
 
-我们的认知是否还会有局限?
 
-世间最渺小之物又是什么?
+			f.write(stra+'\n')	
+			# print soupb.get_text(',', strip=True).encode('utf8')
+			f.write(soupb.get_text(',', strip=True).encode('utf8')+'\n')
+			soupc = i.select(".star span")[1]
+			# print soupc.get_text(',', strip=True)
+			f.write(soupc.get_text(',', strip=True).encode('utf8')+'\n')
+			soupc = i.select(".star span")[3]
+			# print soupc.get_text(',', strip=True).encode('utf8')
+			f.write(soupc.get_text(',', strip=True).encode('utf8')+'\n')
+			if i.select(".quote span"):
+				soupd = i.select(".quote span")[0]
+				f.write(soupd.get_text(',', strip=True).encode('utf8')+'\n')
 
-滚滚长江，却只留有过去，不知未来.
 
-浩淼宇宙，为何我们在此相遇?
+
+		mark = mark+1
+		sleep(random.uniform(1,5))
+	except Exception,e:
+		print str(Subscript)+u'椤垫姄鍙栧け璐?'
+		sleep(random.uniform(0.5,1))
+	# f = open('xiao.txt','w')
+	# for i in range(len(soup)):
+	# 	# print i.get_text().encode('utf8')
+	# 	f.write(soup[i].get_text().encode('utf8'))
+	# 	# f.write(soupa[i].get_text().encode('utf8'))
+	# # print soup
