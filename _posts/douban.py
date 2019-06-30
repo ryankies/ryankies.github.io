@@ -52,7 +52,7 @@ while mark<10:
 		mark = mark+1
 		sleep(random.uniform(1,5))
 	except Exception,e:
-		print str(Subscript)+u'椤垫姄鍙栧け璐?'
+		print str(Subscript)+u'页抓取失败'
 		sleep(random.uniform(0.5,1))
 	# f = open('xiao.txt','w')
 	# for i in range(len(soup)):
@@ -60,3 +60,4 @@ while mark<10:
 	# 	f.write(soup[i].get_text().encode('utf8'))
 	# 	# f.write(soupa[i].get_text().encode('utf8'))
 	# # print soup
+
